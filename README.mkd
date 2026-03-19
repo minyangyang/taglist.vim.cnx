@@ -1,5 +1,13 @@
 
-taglist.vim 中文文档
+gVIM插件 taglist.vim 中文文档
 ====================
 
 这是一份针对 [taglist.vim](http://vim-taglist.sourceforge.net/) v4.5 文档的中文翻译。
+
+
+gVIM插件 NERD_commenter.vim 中文菜单
+====================
+
+  放入到lang文件夹中
+  
+gVim配置文件
