@@ -199,19 +199,26 @@ nmap <leader>2 :set filetype=css<CR>
 nmap <leader>3 :set filetype=javascript<CR>
 nmap <leader>4 :set filetype=php<CR>
 nmap <leader>5 :set filetype=python<CR>
+nmap <leader>6 :set filetype=yaml<CR>
 nmap <leader>0 :set filetype=txt<CR>
+
+" 减少 yaml格式的json文件注释的红污染  
+autocmd FileType json syntax match Comment +\/\/.\+$+
 
 " 更改文件格式中的回车符
 nmap <leader>fd :set fileformat=dos<CR>
 nmap <leader>fu :set fileformat=unix<CR>
 
 " 更改文件编码为utf-8格式并保存
-nmap <leader>utf :set fileencoding=utf-8<CR>:w<CR>
 
 
 "-----------------------------------------------------------------
 " "四肆丁⒋④⑷"	常用插件设定 
 "-----------------------------------------------------------------
+
+"更改 _vim_mru_files 保存的位置
+let MRU_File = $HOME.'\_vim_mru_files'
+
 
 "-----------------------------------------------------------------
 " plugin - bufexplorer.vim Buffers切换
@@ -286,6 +293,11 @@ let html_use_css=1
 " autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
 " autocmd FileType css set omnifunc=csscomplete#CompleteCSS
 " autocmd FileType xml set omnifunc=xmlcomplete#CompleteTags
+" " 补全弹出菜单主题2 
+	highlight! PmenuSbar  NONE
+	highlight! PmenuThumb NONE
+	highlight! Pmenu      guibg=darkcyan
+	highlight! link PmenuSel NonText
 
 "-----------------------------------------------------------------
 " javascript 语法设置 ~/.vim/syntax/javascript.vim
@@ -307,7 +319,10 @@ let g:loaded_vimball      = 1
 let g:GetLatestVimScripts_allowautoinstall= 0 "下载插件后自动安装。
 let g:fencview_autodetect = 0   "关闭自动识别文件编码（在$path有iconv.dll才能开启）
 
-let g:vimim_toggle = 'wubi,pinyin'
+"-----------------------------------------------------------------
+" "最后还是没玩明白的输入法插件
+"-----------------------------------------------------------------
+"let g:vimim_toggle = 'wubi,pinyin'
 "let g:vimim_cloud = 'baidu,sogou,qq,google'
 "let g:vimim_map = ''
 "let g:vimim_mode = 'dynamic'
@@ -315,6 +330,12 @@ let g:vimim_toggle = 'wubi,pinyin'
 "let g:vimim_plugin = '\vimfiles\plugin'
 "let g:vimim_punctuation = 2
 "let g:vimim_shuangpin = 0
+"let g:vimim_ctrl6_toggle=1	
+"let g:vimim_insertmode_toggle=1
+"let g:vimim_smart_space_key=1	
+" " vimim 的快捷键
+" nmap tw ea<C-X><C-U><C-N><C-P>
+" imap tw <esc>ea<C-X><C-U><C-N><C-P>
 
 " Start interactive EasyAlign in visual mode (e.g. vipga)
 xmap ga <Plug>(EasyAlign)
@@ -333,7 +354,8 @@ vnoremap <c-s> :Scn<CR>
 nnoremap <c-s> :exe "normal ggVG<c-s>"<CR>
 
 " 一些方便的文本替换操作
-nmap <leader>dm :%s///g<CR>|					" 删除文件中的^M(CTRL+v,松开v,按m)字符
+nmap <leader>dm :%s/
+//g<CR>|					" 删除文件中的^M(CTRL+v,松开v,按m)字符
 nmap <leader>dbs :%s/[ \t\r]\+$//g<CR>|			" 删除所有行未尾空格
 nmap <leader>del :g/^\s*$/d<CR>|				" 删除包含有空格组成的空行
 nmap <leader>dms :%s/ {1,}/ /g<CR>|				" 将多个空格换成一个空格
@@ -346,16 +368,8 @@ nmap <leader>sfu :%s/^\(.\)/\U\1/g<CR>|			" 句首字母大写
 " :%s/\<id\>/\=line(".")|					" 将各行的 id 字符串替换为行号
 " :%s/\(^\<\w\+\>\)/\=(line(".")-10) .".". submatch(1)
 		" 将每行开头的单词替换为(行号-10).单词的格式,如第11行的word替换成1. word
-	"let g:vimim_ctrl6_toggle=1	
-    "let g:vimim_insertmode_toggle=1
-    let g:vimim_smart_space_key=1	
-	" 补全弹出菜单主题2 
-	highlight! PmenuSbar  NONE
-	highlight! PmenuThumb NONE
-	highlight! Pmenu      guibg=darkcyan
-	highlight! link PmenuSel NonText
-nmap tw ea<C-X><C-U><C-N><C-P>
-imap tw <esc>ea<C-X><C-U><C-N><C-P>
+
+
   
 " =========================================================================
 " "五伍戊⒌⑤⑸"  "六陆己⒍⑥⑹" "七柒庚⒎⑦⑺" "八捌辛⒏⑧⑻" "九玖壬⒐⑨⑼"
